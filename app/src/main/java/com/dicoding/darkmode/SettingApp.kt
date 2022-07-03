@@ -24,9 +24,7 @@ class SettingApp : AppCompatActivity() {
 
 
         val pref = SettingPreferences.getInstance(dataStore)
-        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            MainViewModel::class.java
-        )
+        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref))[MainViewModel::class.java]
         mainViewModel.getThemeSettings().observe(this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {

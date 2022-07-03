@@ -71,8 +71,8 @@ class ListUser : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_option, menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_option,menu)
         return super.onCreateOptionsMenu(menu)
     }
 

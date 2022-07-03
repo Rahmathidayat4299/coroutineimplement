@@ -10,7 +10,7 @@ object RetroService {
 
     private var client = OkHttpClient.Builder().addInterceptor { chain ->
         val newRequest: Request = chain.request().newBuilder()
-            .addHeader("Authorization", "Token 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")
+            .addHeader("Authorization", "Token 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")
             .build()
         chain.proceed(newRequest)
     }.build()
