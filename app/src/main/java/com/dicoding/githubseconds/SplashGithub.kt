@@ -17,6 +17,7 @@ import com.dicoding.util.ConstValue.SPLASH_SEC
 import com.dicoding.util.SettingPreferences
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class SplashGithub : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +26,14 @@ class SplashGithub : AppCompatActivity() {
         Handler(Looper.myLooper()!!).postDelayed({
             val intent = Intent(this, ListUser::class.java)
             startActivity(intent)
+            finish()
         }, SPLASH_SEC)
 
 
         val pref = SettingPreferences.getInstance(dataStore)
         viewModel = ViewModelProvider(this, ViewModelFactory(pref))[MainViewModel::class.java]
-        viewModel.getThemeSettings().observe(this
+        viewModel.getThemeSettings().observe(
+            this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

@@ -15,9 +15,9 @@ class FollowerVm : ViewModel() {
     // TODO: Implement the ViewModel
     private val dataFollower = MutableLiveData<ArrayList<ItemResult>>()
 
-    fun getFollower(username: String) {
+    fun getFollower(username: String): LiveData<ArrayList<ItemResult>> {
         RetroService.apiInstansiasi
-            .pathFollow(username,"followers")
+            .pathFollow(username, "followers")
             .enqueue(object : Callback<ArrayList<ItemResult>> {
                 override fun onResponse(
                     call: Call<ArrayList<ItemResult>>,
@@ -35,9 +35,6 @@ class FollowerVm : ViewModel() {
                 }
 
             })
-    }
-
-    fun showFollower(): LiveData<ArrayList<ItemResult>> {
         return dataFollower
     }
 }

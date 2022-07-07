@@ -42,12 +42,10 @@ class FollowerFragment : Fragment() {
         }
         viewLoading(true)
 
-        viewModel.getFollower(username)
-        viewModel.showFollower().observe(viewLifecycleOwner) {
+        viewModel.getFollower(username).observe(viewLifecycleOwner) {
             if (it != null) adapterUser.addList(it)
             viewLoading(false)
         }
-
     }
 
     private fun viewLoading(isLoading: Boolean) {

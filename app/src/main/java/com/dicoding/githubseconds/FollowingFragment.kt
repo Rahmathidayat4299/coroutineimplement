@@ -40,16 +40,15 @@ class FollowingFragment : Fragment(R.layout.follow_fragment) {
             adapter = adapterUser
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         }
+
         viewLoading(true)
 
-        viewModel.getFollowing(username)
-        viewModel.showFollowing().observe(viewLifecycleOwner) {
+        viewModel.getFollowing(username).observe(viewLifecycleOwner) {
             if (it != null) {
                 adapterUser.addList(it)
                 viewLoading(false)
             }
         }
-
     }
 
     override fun onDestroyView() {

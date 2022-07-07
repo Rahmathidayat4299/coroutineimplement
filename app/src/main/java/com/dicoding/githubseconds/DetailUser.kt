@@ -33,23 +33,25 @@ class DetailUser : AppCompatActivity() {
         val url = intent.getStringExtra(EXTRA_URL)
         val bundle = Bundle()
         bundle.putString(USERNAME_GITHUB, username)
-        if (username != null) {
-            viewModel.getDetUser(username)
-        }
-        viewModel.showDetail().observe(this) {
-            if (it != null) {
-                binding.apply {
-                    detailNama.text = it.name
-                    detailUsername.text = it.login
-                    followers.text = it.followers.toString()
-                    following.text = it.following.toString()
-                    repoUser.text = it.publicRepos.toString()
-                    locationUser.text = it.location
-                    companyUser.text = it.company
-                    Glide.with(this@DetailUser)
-                        .load(it.avatarUrl)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(ivAvatar)
+//        if (username != null) {
+//            viewModel.getDetUser(username)
+//        }
+        username?.let {
+            viewModel.getDetUser(it).observe(this) { it1 ->
+                if (it1 != null) {
+                    binding.apply {
+                        detailNama.text = it1.name
+                        detailUsername.text = it1.login
+                        followers.text = it1.followers.toString()
+                        following.text = it1.following.toString()
+                        repoUser.text = it1.publicRepos.toString()
+                        locationUser.text = it1.location
+                        companyUser.text = it1.company
+                        Glide.with(this@DetailUser)
+                            .load(it1.avatarUrl)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(ivAvatar)
+                    }
                 }
             }
         }

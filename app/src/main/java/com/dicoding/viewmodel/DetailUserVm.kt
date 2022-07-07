@@ -23,7 +23,7 @@ class DetailUserVm(application: Application) : AndroidViewModel(application) {
     init {
         userDao = userDb?.favoriteUserDao()
     }
-    fun getDetUser(username: String) {
+    fun getDetUser(username: String): LiveData<ModelDet> {
         RetroService.apiInstansiasi
             .userDetail(username)
             .enqueue(object : retrofit2.Callback<ModelDet> {
@@ -40,11 +40,12 @@ class DetailUserVm(application: Application) : AndroidViewModel(application) {
                 }
 
             })
-    }
-
-    fun showDetail(): LiveData<ModelDet> {
         return detailUser
     }
+
+//    fun showDetail() {
+//
+//    }
 
     fun addFavorite(username: String?, id: Int, avatarUrl: String?, url: String?) {
         CoroutineScope(Dispatchers.IO).launch {
