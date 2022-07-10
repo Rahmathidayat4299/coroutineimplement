@@ -9,7 +9,7 @@
         android:id="@+id/splashFragment"
         android:name="com.dicoding.fragment.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_listUserFragment"
             app:destination="@id/listUserFragment" />
@@ -18,5 +18,18 @@
         android:id="@+id/listUserFragment"
         android:name="com.dicoding.fragment.ListUserFragment"
         android:label="fragment_list_user"
-        tools:layout="@layout/fragment_list_user" />
+        tools:layout="@layout/fragment_list_user">
+        <action
+            android:id="@+id/action_listUserFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.dicoding.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="result"
+            app:argType="com.dicoding.model.remote.ModelDet" />
+    </fragment>
 </navigation>

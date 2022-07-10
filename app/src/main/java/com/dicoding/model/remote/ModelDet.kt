@@ -1,7 +1,10 @@
 package com.dicoding.model.remote
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ModelDet(
     @SerializedName("login")
     val login: String,
@@ -23,4 +26,4 @@ data class ModelDet(
     val location: String,
     @SerializedName("company")
     val company: String,
-)
+): Parcelable

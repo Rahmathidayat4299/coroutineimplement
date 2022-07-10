@@ -18,8 +18,8 @@ import com.dicoding.viewmodel.ListUserVm
 class ListUserFragment : Fragment() {
     private var _binding: FragmentListUserBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapterUser: AdapterUser
-    private lateinit var viewModel: ListUserVm
+    private lateinit var adapterUser: AdapterUserGithub
+    private val viewModel by viewModels<ListUserVm>()
 
 
     override fun onCreateView(
@@ -35,14 +35,14 @@ class ListUserFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterUser = AdapterUser()
+        adapterUser = AdapterUserGithub()
         adapterUser.notifyDataSetChanged()
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(ListUserVm::class.java)
-//        showData()
 
+        adapterUser.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("result", it)
+            }
+        }
 
         binding.search.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {

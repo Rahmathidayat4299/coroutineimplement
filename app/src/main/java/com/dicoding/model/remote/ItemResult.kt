@@ -1,7 +1,11 @@
 package com.dicoding.model.remote
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Suppress("DEPRECATED_ANNOTATION")
+@Parcelize
 data class ItemResult(
     @SerializedName("html_url")
     val htmlUrl: String?,
@@ -11,4 +15,4 @@ data class ItemResult(
     val id: Int,
     @SerializedName("avatar_url")
     val avatarUrl: String?,
-)
+) : Parcelable
