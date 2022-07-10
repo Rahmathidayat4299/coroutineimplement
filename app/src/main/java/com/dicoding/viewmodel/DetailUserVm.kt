@@ -43,10 +43,6 @@ class DetailUserVm(application: Application) : AndroidViewModel(application) {
         return detailUser
     }
 
-//    fun showDetail() {
-//
-//    }
-
     fun addFavorite(username: String?, id: Int, avatarUrl: String?, url: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             val user = FavoriteUser(username, id, avatarUrl, url)

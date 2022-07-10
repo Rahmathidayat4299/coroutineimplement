@@ -10,6 +10,7 @@ import com.dicoding.githubseconds.databinding.ItemListuserBinding
 import com.dicoding.model.remote.ItemResult
 
 class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
+
     private var listUser = ArrayList<ItemResult>()
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -54,6 +55,7 @@ class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
     }
 
     override fun getItemCount() = listUser.size
+
 
     interface OnItemClickCallback {
         fun onItemClik(data: ItemResult)
