@@ -19,8 +19,8 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<DetailUserVm>()
     private var username = ""
-    private var data: ItemResult? = null
-    val args: DetailFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,24 +35,25 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val detailUser = args.result
+        val detUser = args.result
+
 
 
         viewModel.getDetUser(username).observe(viewLifecycleOwner) {
             binding.apply {
-                detailNama.text = detailUser.name
-                detailUsername.text = detailUser.login
-                followers.text = detailUser.followers.toString()
-                following.text = detailUser.following.toString()
-                following.text = detailUser.following.toString()
-                repoUser.text = detailUser.publicRepos.toString()
-                locationUser.text = detailUser.location
-                companyUser.text = detailUser.company
-                Glide.with(this@DetailFragment).load(detailUser.avatarUrl)
+                detailNama.text = detUser.name
+                detailUsername.text = detUser.login
+                followers.text = detUser.followers.toString()
+                following.text = detUser.following.toString()
+                repoUser.text = detUser.publicRepos.toString()
+                locationUser.text = detUser.location
+                companyUser.text = detUser.company
+                Glide.with(this@DetailFragment).load(detUser.avatarUrl)
                     .apply(RequestOptions.circleCropTransform()).into(ivAvatar)
             }
-
         }
+
+
     }
 
 

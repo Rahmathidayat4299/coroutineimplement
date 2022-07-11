@@ -4,6 +4,8 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+
+@Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
 data class ModelDet(
     @SerializedName("login")

@@ -1,6 +1,5 @@
 package com.dicoding.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +7,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.adapter.AdapterUser
+import com.dicoding.githubseconds.R
 import com.dicoding.githubseconds.databinding.FragmentListUserBinding
+import com.dicoding.model.remote.ModelDet
 import com.dicoding.viewmodel.ListUserVm
 
 
@@ -32,17 +32,24 @@ class ListUserFragment : Fragment() {
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterUser = AdapterUserGithub()
-        adapterUser.notifyDataSetChanged()
+//        adapterUser.notifyDataSetChanged()
 
-        adapterUser.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putParcelable("result", it)
+        adapterUser.setOnClickListener(object : AdapterUserGithub.OnClickListener {
+            override fun onClick(item: ModelDet) {
+                val bundle = Bundle()
+                bundle.putParcelable("result", item)
+                findNavController().navigate(R.id.action_listUserFragment_to_detailFragment, bundle)
+
             }
-        }
+
+        })
+
+
+
+
 
         binding.search.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -51,7 +58,7 @@ class ListUserFragment : Fragment() {
                         viewLoading(true)
                         viewModel.getUser(query).observe(viewLifecycleOwner) {
                             if (it != null) {
-                                adapterUser.addList(it)
+                                adapterUser.setData(it)
                                 viewLoading(false)
                                 showData()
                             }
@@ -61,7 +68,6 @@ class ListUserFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean = false
-
             })
         }
 
