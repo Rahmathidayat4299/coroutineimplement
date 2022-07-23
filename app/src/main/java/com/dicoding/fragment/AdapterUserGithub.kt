@@ -29,7 +29,13 @@ class AdapterUserGithub : RecyclerView.Adapter<AdapterUserGithub.ListViewHolder>
         }
 
         override fun areContentsTheSame(oldItem: ItemResult, newItem: ItemResult): Boolean {
-            return oldItem.id == newItem.id
+            return when{
+                oldItem.id != newItem.id -> false
+                oldItem.login != newItem.login -> false
+                oldItem.htmlUrl != newItem.htmlUrl -> false
+                oldItem.avatarUrl != newItem.avatarUrl -> false
+                else-> true
+            }
         }
 
 
