@@ -44,7 +44,7 @@ class FollowerFragment : Fragment() {
         viewLoading(true)
 
         viewModel.getFollower(username).observe(viewLifecycleOwner) {
-            if (it != null) adapterUser.setData(it)
+            if (it != null) adapterUser.differ.submitList(it)
             viewLoading(false)
         }
     }

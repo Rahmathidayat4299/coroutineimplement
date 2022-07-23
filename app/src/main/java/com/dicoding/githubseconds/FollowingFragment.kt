@@ -46,7 +46,7 @@ class FollowingFragment : Fragment(R.layout.follow_fragment) {
 
         viewModel.getFollowing(username).observe(viewLifecycleOwner) {
             if (it != null) {
-                adapterUser.setData(it)
+                adapterUser.differ.submitList(it)
                 viewLoading(false)
             }
         }

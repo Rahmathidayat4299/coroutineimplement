@@ -58,7 +58,7 @@ class ListUserFragment : Fragment() {
                         viewLoading(true)
                         viewModel.getUser(query).observe(viewLifecycleOwner) {
                             if (it != null) {
-                                adapterUser.setData(it)
+                                adapterUser.differ.submitList(it)
                                 viewLoading(false)
                                 showData()
                             }

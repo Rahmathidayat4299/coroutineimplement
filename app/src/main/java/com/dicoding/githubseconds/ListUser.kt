@@ -1,6 +1,6 @@
 package com.dicoding.githubseconds
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -10,8 +10,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.adapter.AdapterUser
 import com.dicoding.darkmode.SettingApp
+import com.dicoding.fragment.AdapterUserGithub
 import com.dicoding.githubseconds.databinding.ActivityListUserBinding
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.viewmodel.ListUserVm
@@ -19,19 +19,18 @@ import com.dicoding.viewmodel.ListUserVm
 class ListUser : AppCompatActivity() {
     private lateinit var binding: ActivityListUserBinding
     private val viewModel by viewModels<ListUserVm>()
-    private lateinit var adapterUser: AdapterUser
+    private lateinit var adapterUser: AdapterUserGithub
 
-    @SuppressLint("NotifyDataSetChanged")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        adapterUser = AdapterUser()
-        adapterUser.notifyDataSetChanged()
+
+        adapterUser = AdapterUserGithub()
 
 
         binding.search.apply {
-
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (query?.isNotEmpty()!!
@@ -40,7 +39,7 @@ class ListUser : AppCompatActivity() {
                         viewModel.getUser(query).observe(this@ListUser) {
                             if (it != null) {
 
-                                adapterUser.addList(it)
+                                adapterUser.differ.submitList(it)
                                 viewLoading(false)
                                 showData()
                             }
@@ -56,7 +55,7 @@ class ListUser : AppCompatActivity() {
 
         }
 
-        adapterUser.setOnItemClickCallback(object : AdapterUser.OnItemClickCallback {
+        adapterUser.setOnItemClickCallback(object : AdapterUserGithub.OnItemClickCallback {
             override fun onItemClik(data: ItemResult) {
                 Intent(this@ListUser, DetailUser::class.java).also {
                     it.putExtra(DetailUser.USERNAME_GITHUB, data.login)
@@ -72,7 +71,7 @@ class ListUser : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_option,menu)
+        menuInflater.inflate(R.menu.menu_option, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -102,5 +101,7 @@ class ListUser : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ListUser, LinearLayoutManager.VERTICAL, false)
         }
     }
+
+
 
 }

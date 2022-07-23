@@ -16,3 +16,24 @@ data class ItemResult(
     @SerializedName("avatar_url")
     val avatarUrl: String?,
 ) : Parcelable
+{
+    override fun equals(other: Any?): Boolean {
+        if(javaClass != other?.javaClass){
+            return false
+        }
+        other as ItemResult
+        if (id!= other.id){
+            return false
+        }
+        if (avatarUrl!= other.avatarUrl){
+            return false
+        }
+        if (login!= other.login){
+            return false
+        }
+        if (htmlUrl!= other.htmlUrl){
+            return false
+        }
+        return true
+    }
+}

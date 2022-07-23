@@ -21,7 +21,7 @@ class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     fun addList(item: ArrayList<ItemResult>) {
         listUser.apply {
             clear()
@@ -69,3 +69,5 @@ class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
         fun onItemClik(data: ItemResult)
     }
 }
+
+

@@ -2,11 +2,11 @@ package com.dicoding.githubseconds
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.adapter.AdapterUser
+import com.dicoding.fragment.AdapterUserGithub
 import com.dicoding.githubseconds.databinding.ActivityFavoriteUserBinding
 import com.dicoding.model.localstorage.FavoriteUser
 import com.dicoding.model.remote.ItemResult
@@ -14,17 +14,16 @@ import com.dicoding.viewmodel.FavUserVm
 
 class FavUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteUserBinding
-    private lateinit var adapterUser: AdapterUser
+    private lateinit var adapterUser: AdapterUserGithub
     private val viewModel by viewModels<FavUserVm>()
 
-    @SuppressLint("NotifyDataSetChanged")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        adapterUser = AdapterUser()
-        adapterUser.notifyDataSetChanged()
-        adapterUser.setOnItemClickCallback(object : AdapterUser.OnItemClickCallback {
+        adapterUser = AdapterUserGithub()
+        adapterUser.setOnItemClickCallback(object : AdapterUserGithub.OnItemClickCallback {
             override fun onItemClik(data: ItemResult) {
                 Intent(this@FavUserActivity, DetailUser::class.java).also {
                     it.putExtra(DetailUser.USERNAME_GITHUB, data.login)
@@ -43,7 +42,7 @@ class FavUserActivity : AppCompatActivity() {
         viewModel.getFavoriteUser()?.observe(this) {
             if (it != null) {
                 val list = mapList(it)
-                adapterUser.addList(list)
+                adapterUser.differ.submitList(list)
             }
         }
     }
