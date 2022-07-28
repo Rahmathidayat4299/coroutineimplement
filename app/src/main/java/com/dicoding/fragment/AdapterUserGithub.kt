@@ -25,17 +25,12 @@ class AdapterUserGithub : RecyclerView.Adapter<AdapterUserGithub.ListViewHolder>
 
     private val differCallback = object : DiffUtil.ItemCallback<ItemResult>() {
         override fun areItemsTheSame(oldItem: ItemResult, newItem: ItemResult): Boolean {
-            return oldItem === newItem
+            return oldItem.htmlUrl == newItem.htmlUrl && oldItem.id == newItem.id && oldItem.avatarUrl == newItem.avatarUrl
         }
 
         override fun areContentsTheSame(oldItem: ItemResult, newItem: ItemResult): Boolean {
-            return when{
-                oldItem.id != newItem.id -> false
-                oldItem.login != newItem.login -> false
-                oldItem.htmlUrl != newItem.htmlUrl -> false
-                oldItem.avatarUrl != newItem.avatarUrl -> false
-                else-> true
-            }
+
+            return oldItem.login == newItem.login
         }
 
 
@@ -97,7 +92,7 @@ class AdapterUserGithub : RecyclerView.Adapter<AdapterUserGithub.ListViewHolder>
         fun onItemClik(data: ItemResult)
     }
 
-    fun setData(listUserGithub: ArrayList<ItemResult>){
+    fun setData(listUserGithub: ArrayList<ItemResult>) {
 
 
     }

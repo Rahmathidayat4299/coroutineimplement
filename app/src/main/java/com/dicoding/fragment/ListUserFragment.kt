@@ -13,8 +13,10 @@ import com.dicoding.githubseconds.R
 import com.dicoding.githubseconds.databinding.FragmentListUserBinding
 import com.dicoding.model.remote.ModelDet
 import com.dicoding.viewmodel.ListUserVm
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 
+@DelicateCoroutinesApi
 class ListUserFragment : Fragment() {
     private var _binding: FragmentListUserBinding? = null
     private val binding get() = _binding!!
@@ -35,7 +37,6 @@ class ListUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterUser = AdapterUserGithub()
-//        adapterUser.notifyDataSetChanged()
 
         adapterUser.setOnClickListener(object : AdapterUserGithub.OnClickListener {
             override fun onClick(item: ModelDet) {
@@ -44,7 +45,6 @@ class ListUserFragment : Fragment() {
                 findNavController().navigate(R.id.action_listUserFragment_to_detailFragment, bundle)
 
             }
-
         })
 
 

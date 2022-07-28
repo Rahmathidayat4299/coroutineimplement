@@ -15,7 +15,9 @@ import com.dicoding.fragment.AdapterUserGithub
 import com.dicoding.githubseconds.databinding.ActivityListUserBinding
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.viewmodel.ListUserVm
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class ListUser : AppCompatActivity() {
     private lateinit var binding: ActivityListUserBinding
     private val viewModel by viewModels<ListUserVm>()
@@ -29,6 +31,10 @@ class ListUser : AppCompatActivity() {
 
         adapterUser = AdapterUserGithub()
 
+        binding.rcvUser.apply {
+            adapter = adapterUser
+            layoutManager = LinearLayoutManager(this@ListUser, LinearLayoutManager.VERTICAL, false)
+        }
 
         binding.search.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -38,17 +44,13 @@ class ListUser : AppCompatActivity() {
                         viewLoading(true)
                         viewModel.getUser(query).observe(this@ListUser) {
                             if (it != null) {
-
                                 adapterUser.differ.submitList(it)
                                 viewLoading(false)
-                                showData()
                             }
                         }
                     }
-
                     return true
                 }
-
 
                 override fun onQueryTextChange(newText: String?): Boolean = false
             })
@@ -66,8 +68,6 @@ class ListUser : AppCompatActivity() {
                 }
             }
         })
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -94,14 +94,4 @@ class ListUser : AppCompatActivity() {
     private fun viewLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
-    private fun showData() {
-        binding.rcvUser.apply {
-            adapter = adapterUser
-            layoutManager = LinearLayoutManager(this@ListUser, LinearLayoutManager.VERTICAL, false)
-        }
-    }
-
-
-
 }

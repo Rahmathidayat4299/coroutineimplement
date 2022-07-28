@@ -22,6 +22,7 @@ class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addList(item: ArrayList<ItemResult>) {
         listUser.apply {
             clear()
