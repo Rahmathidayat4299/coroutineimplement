@@ -6,25 +6,30 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.dicoding.model.localstorage.FavoriteUser
 import com.dicoding.model.localstorage.FavoriteUserDao
 import com.dicoding.model.localstorage.UserDatabase
 import com.dicoding.model.remote.ModelDet
 import com.dicoding.retrofit.RetroService
+import com.dicoding.util.Repository
 import kotlinx.coroutines.*
 
-@DelicateCoroutinesApi
+
 class DetailUserVm(application: Application) : AndroidViewModel(application) {
+
     private val detailUser = MutableLiveData<ModelDet>()
     private var userDao: FavoriteUserDao? = null
     private var userDb: UserDatabase? = UserDatabase.getDatabase(application)
 
     init {
         userDao = userDb?.favoriteUserDao()
+
     }
 
     fun getDetUser(username: String): LiveData<ModelDet> {
-        GlobalScope.launch(Dispatchers.IO) {
+
+        viewModelScope.launch {
             val response = RetroService.apiInstansiasi.userDetail(username)
             try {
                 if (response.isSuccessful) {
@@ -34,28 +39,25 @@ class DetailUserVm(application: Application) : AndroidViewModel(application) {
                 Log.e(TAG, "getDetUser: $e error detailuser not found")
             }
         }
-
         return detailUser
     }
+
+
 //    fun getDetUser(username: String): LiveData<ModelDet> {
-//        RetroService.apiInstansiasi
-//            .userDetail(username)
-//            .enqueue(object : retrofit2.Callback<ModelDet> {
-//                override fun onResponse(call: Call<ModelDet>, response: Response<ModelDet>) {
-//                    if (response.isSuccessful) {
-//                        detailUser.postValue(response.body())
-//                    } else {
-//                        Log.e("DetUserVM", "onResponse: error data ")
-//                    }
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val response = RetroService.apiInstansiasi.userDetail(username)
+//            try {
+//                if (response.isSuccessful) {
+//                    detailUser.postValue(response.body())
 //                }
+//            } catch (e: Exception) {
+//                Log.e(TAG, "getDetUser: $e error detailuser not found")
+//            }
+//        }
 //
-//                override fun onFailure(call: Call<ModelDet>, t: Throwable) {
-//                    Log.e("DetUserVM", "onResponse: error data ${t.message} ")
-//                }
-//
-//            })
 //        return detailUser
 //    }
+
 
     fun addFavorite(username: String?, id: Int, avatarUrl: String?, url: String?) {
         CoroutineScope(Dispatchers.IO).launch {

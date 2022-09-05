@@ -5,15 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.dicoding.util.ConstValue.TITLE_FOLLOW
 import com.dicoding.adapter.AdapterViewPager
 import com.dicoding.githubseconds.databinding.ActivityDetailUserBinding
+
+import com.dicoding.util.ConstValue.TITLE_FOLLOW
+
 import com.dicoding.viewmodel.DetailUserVm
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+
 
 class DetailUser : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding

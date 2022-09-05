@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailUser"
+    tools:context="com.dicoding.githubseconds.DetailUser"
     tools:ignore="Overdraw">
 
     <com.google.android.material.appbar.AppBarLayout

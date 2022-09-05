@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.fragment.AdapterUserGithub
 import com.dicoding.githubseconds.databinding.FollowFragmentBinding
 import com.dicoding.viewmodel.FollowingVm
-import kotlinx.coroutines.DelicateCoroutinesApi
 
-@DelicateCoroutinesApi
+
 class FollowingFragment : Fragment(R.layout.follow_fragment) {
     private var _binding: FollowFragmentBinding? = null
     private val binding get() = _binding!!

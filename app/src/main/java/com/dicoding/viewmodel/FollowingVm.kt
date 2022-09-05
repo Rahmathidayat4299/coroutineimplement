@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.retrofit.RetroService
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -13,12 +14,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
-@DelicateCoroutinesApi
+
 class FollowingVm : ViewModel() {
     private val dataFollowing = MutableLiveData<ArrayList<ItemResult>>()
 
     fun getFollowing(username: String): LiveData<ArrayList<ItemResult>> {
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val response =
                 RetroService.apiInstansiasi.pathFollow(username, "following")
             try {

@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.githubseconds.DetailUser
-import com.dicoding.githubseconds.databinding.ItemListuserBinding
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.model.remote.ModelDet
+import com.dicoding.githubseconds.databinding.ItemListuserBinding
 
-@Suppress("UNUSED_EXPRESSION")
+
 class AdapterUserGithub : RecyclerView.Adapter<AdapterUserGithub.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
     private var listUser = ArrayList<ItemResult>()

@@ -1,16 +1,17 @@
 package com.dicoding.githubseconds
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import com.dicoding.fragment.util.Repository
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.fragment.viewmodel.SearchViewmodel
+import com.dicoding.githubseconds.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: SearchViewmodel
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 //        val searchRepository = Repository()
 //        val viewModelProviderFactory = GithubVmFactory(searchRepository)
 //        viewModel =

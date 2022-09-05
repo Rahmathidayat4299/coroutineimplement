@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.githubseconds.databinding.FragmentDetailBinding
-import com.dicoding.model.remote.ItemResult
 import com.dicoding.viewmodel.DetailUserVm
 
 

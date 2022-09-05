@@ -15,9 +15,8 @@ import com.dicoding.fragment.AdapterUserGithub
 import com.dicoding.githubseconds.databinding.ActivityListUserBinding
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.viewmodel.ListUserVm
-import kotlinx.coroutines.DelicateCoroutinesApi
 
-@DelicateCoroutinesApi
+
 class ListUser : AppCompatActivity() {
     private lateinit var binding: ActivityListUserBinding
     private val viewModel by viewModels<ListUserVm>()

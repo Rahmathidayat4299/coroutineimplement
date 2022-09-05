@@ -1,6 +1,5 @@
 package com.dicoding.githubseconds
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -11,6 +10,7 @@ import com.dicoding.githubseconds.databinding.ActivityFavoriteUserBinding
 import com.dicoding.model.localstorage.FavoriteUser
 import com.dicoding.model.remote.ItemResult
 import com.dicoding.viewmodel.FavUserVm
+
 
 class FavUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteUserBinding

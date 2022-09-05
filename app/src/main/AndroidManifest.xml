@@ -13,17 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubSeconds">
         <activity
-            android:name=".MainActivity"
+            android:name="com.dicoding.githubseconds.MainActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".FavUserActivity"
+            android:name="com.dicoding.githubseconds.FavUserActivity"
             android:exported="false" />
         <activity
             android:name="com.dicoding.darkmode.SettingApp"
             android:exported="false" />
         <activity
-            android:name=".ListUser"
+            android:name="com.dicoding.githubseconds.ListUser"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashGithub"
+            android:name="com.dicoding.githubseconds.SplashGithub"
             android:exported="false"/>
 
         <activity
-            android:name=".DetailUser"
+            android:name="com.dicoding.githubseconds.DetailUser"
             android:exported="false" />
     </application>
 
