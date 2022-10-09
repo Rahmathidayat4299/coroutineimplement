@@ -42,7 +42,7 @@ class FavUserActivity : AppCompatActivity() {
         viewModel.getFavoriteUser()?.observe(this) {
             if (it != null) {
                 val list = mapList(it)
-                adapterUser.differ.submitList(mapList(it))
+                adapterUser.differ.submitList(list)
             }
         }
     }
